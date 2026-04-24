@@ -26,13 +26,13 @@ int rotationPassword() {
             number = std::stoi(radek.substr(1));
             if (direction == 'L') {
                 if ((rotations - number) <= 0) {
-                    for (int i = 0; i < ((rotations - number) / 100 ) * (-1); i++)
-                    {
-                        passedZeros = passedZeros + ((rotations - number) / 100 ) * (-1) + 1;
+                    if (rotations > 0 && number >= rotations) {
+                        passedZeros += 1 + ((rotations - number) / 100 * (-1));
+                    } else {
+                        passedZeros += number / 100;
                     }
-                    
                 }
-                
+
                 rotations = (rotations - number) % 100;
 
                 if (rotations < 0) {
@@ -41,10 +41,7 @@ int rotationPassword() {
             }
             if (direction == 'R') {
                 if ((rotations + number) >= 100) {
-                    for (int i = 0; i < (rotations + number) / 100; i++)
-                    {
-                        passedZeros++;
-                    }
+                    passedZeros = passedZeros + (rotations + number) / 100;
                 }
 
                 rotations = (rotations + number) % 100;
